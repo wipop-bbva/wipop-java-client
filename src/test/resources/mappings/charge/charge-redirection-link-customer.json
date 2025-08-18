@@ -1,0 +1,47 @@
+{
+  "request": {
+    "urlPathPattern": "/c/v1/m00000000000000000/customers/a0000000000000000000/charges",
+    "method": "POST",
+    "bodyPatterns": [
+      {
+        "matchesJsonPath": {
+          "expression": "$.order_id",
+          "equalTo": "1234abcdefgh"
+        }
+      },
+      {
+        "matchesJsonPath": {
+          "expression": "$.product_type",
+          "equalTo": "PAYMENT_LINK",
+          "caseInsensitive": true
+        }
+      },
+      {
+        "matchesJsonPath": {
+          "expression": "$.origin_channel",
+          "equalTo": "API",
+          "caseInsensitive": true
+        }
+      },
+      {
+        "matchesJsonPath": {
+          "expression": "$.capture",
+          "equalTo": "true"
+        }
+      },
+      {
+        "matchesJsonPath": {
+          "expression": "$.terminal.id",
+          "equalTo": "1"
+        }
+      }
+    ]
+  },
+  "response": {
+    "status": 200,
+    "bodyFileName": "./charge/charge-redirection-link-customer.json",
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  }
+}

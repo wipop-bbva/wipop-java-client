@@ -1,0 +1,22 @@
+{
+  "priority": 1,
+  "request": {
+    "urlPathPattern": "/c/v1/m00000000000000000/charges/tr000000000000000000/reversal",
+    "method": "POST",
+    "bodyPatterns": [
+      {
+        "matchesJsonPath": {
+          "expression": "$.reason",
+          "equalTo": "PRE_REVERSAL"
+        }
+      }
+    ]
+  },
+  "response": {
+    "status": 200,
+    "bodyFileName": "./charge/charge-reversal.json",
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  }
+}

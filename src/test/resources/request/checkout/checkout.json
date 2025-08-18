@@ -1,0 +1,13 @@
+{
+  "amount": 1,
+  "currency": "eur",
+  "order_id": "1234abcdefgh",
+  "description": "Checkout button payment",
+  "product_type": "button_payment",
+  "origin": "payment_gateway",
+  "redirect_url": "https://example.com",
+  "send_email": true,
+  "terminal": {
+    "id": 2
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "priority": 1,
+  "request": {
+    "urlPathPattern": "/c/v1/m00000000000000000/charges/tr000000000000000000/confirm",
+    "method": "POST",
+    "bodyPatterns": [
+      {
+        "matchesJsonPath": {
+          "expression": "$.token_id",
+          "equalTo": "k000000000000000000"
+        }
+      }
+    ]
+  },
+  "response": {
+    "status": 200,
+    "bodyFileName": "./charge/charge-confirm.json",
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  }
+}

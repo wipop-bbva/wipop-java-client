@@ -1,0 +1,22 @@
+{
+  "priority": 1,
+  "request": {
+    "urlPathPattern": "/c/v1/m00000000000000000/charges/tr000000000000000000/capture",
+    "method": "POST",
+    "bodyPatterns": [
+      {
+        "matchesJsonPath": {
+          "expression": "$.amount",
+          "equalTo": "1"
+        }
+      }
+    ]
+  },
+  "response": {
+    "status": 200,
+    "bodyFileName": "./charge/charge-refund.json",
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "id": "tr000000000000000000",
+  "method": "CARD",
+  "currency": "EUR",
+  "operation_type": "IN",
+  "transaction_type": "CHARGE",
+  "status": "COMPLETED",
+  "creation_date": "2025-08-14T07:28:00",
+  "operation_date": "2025-08-14T07:28:15",
+  "description": "Test charge capture pre-authorization",
+  "order_id": "1234abcdefgh",
+  "amount": 1,
+  "customer": {
+    "id": "a0000000000000000000",
+    "name": "Foo",
+    "last_name": "Bar",
+    "email": "foo.bar@example.com",
+    "phone_number": "5555555555",
+    "address": {
+      "city": "Madrid",
+      "country_code": "ES",
+      "postal_code": "150993",
+      "line1": "Puerta del Sol",
+      "line2": "",
+      "line3": "",
+      "state": "Madrid"
+    },
+    "external_id": "foo-bar"
+  },
+  "card": {
+    "id": "k000000000000000000",
+    "type": "UNKNOWN",
+    "brand": "VISA",
+    "card_number": "450000XXXXXX0000",
+    "holder_name": "Foo Bar",
+    "expiration_year": "49",
+    "expiration_month": "12",
+    "allows_charges": false,
+    "allows_payouts": false,
+    "creation_date": "2025-08-14T12:14:30",
+    "bank_name": "DESCONOCIDO",
+    "bank_code": "000"
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "method": "card",
+  "amount": 1,
+  "currency": "eur",
+  "description": "Test redirection payment link",
+  "order_id": "1234abcdefgh",
+  "product_type": "payment_link",
+  "origin_channel": "api",
+  "redirect_url": "https://example.com",
+  "send_email": false,
+  "capture": true,
+  "terminal": {
+    "id": 1
+  },
+  "language": "es-ES"
+}

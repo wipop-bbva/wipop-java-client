@@ -1,0 +1,17 @@
+{
+  "method": "card",
+  "amount": 1,
+  "currency": "eur",
+  "description": "Test redirection payment gateway COF",
+  "order_id": "1234abcdefgh",
+  "product_type": "payment_gateway",
+  "origin_channel": "api",
+  "use_cof": true,
+  "redirect_url": "https://example.com",
+  "send_email": false,
+  "capture": true,
+  "terminal": {
+    "id": 2
+  },
+  "language": "es-ES"
+}

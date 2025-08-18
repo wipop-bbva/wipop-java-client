@@ -1,0 +1,19 @@
+{
+  "method": "card",
+  "amount": 1,
+  "currency": "eur",
+  "description": "Test recurrent charge",
+  "order_id": "1234abcdefgh",
+  "product_type": "payment_gateway",
+  "origin_channel": "api",
+  "redirect_url": "https://example.com",
+  "send_email": false,
+  "source_id": "k000000000000000000",
+  "post_type": {
+    "mode": "RECURRENT"
+  },
+  "use_cof": true,
+  "terminal": {
+    "id": 1
+  }
+}

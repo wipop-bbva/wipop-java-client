@@ -1,0 +1,44 @@
+{
+  "request": {
+    "urlPathPattern": "/k/v1/m0000000000000000000/checkouts",
+    "method": "POST",
+    "bodyPatterns": [
+      {
+        "matchesJsonPath": {
+          "expression": "$.order_id",
+          "equalTo": "1234abcdefgh"
+        }
+      },
+      {
+        "matchesJsonPath": {
+          "expression": "$.product_type",
+          "equalTo": "PAYMENT_GATEWAY",
+          "caseInsensitive": true
+        }
+      },
+      {
+        "matchesJsonPath": {
+          "expression": "$.origin",
+          "equalTo": "PAYMENT_BUTTON",
+          "caseInsensitive": true
+        }
+      },
+      {
+        "matchesJsonPath": {
+          "expression": "$.terminal.id",
+          "equalTo": "2"
+        }
+      },
+      {
+        "matchesJsonPath": "$.customer"
+      }
+    ]
+  },
+  "response": {
+    "status": 200,
+    "bodyFileName": "./checkout/checkout.json",
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  }
+}
