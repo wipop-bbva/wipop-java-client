@@ -1,24 +1,24 @@
 # Wipop Java Client
 
-A Java client library for integrating with the Wipop payment processing API.
+Una librería cliente de Java para integrar con la API de procesamiento de pagos de Wipop.
 
-## Features
+## Características
 
-- **Charge Operations**: Create, confirm, capture, refund, and reverse charges
-- **Checkout Operations**: Create checkout for payment processing
-- **Environments**: Support for sandbox and production environments
-- **Type Safety**: Fully typed API with comprehensive domain models
-- **Builder Pattern**: Fluent API for building request parameters
-- **Error Handling**: Structured exception handling with detailed error information
+- **Operaciones de Cargo**: Crear, confirmar, capturar, reembolsar y reversar cargos
+- **Operaciones de Checkout**: Crear checkout para procesamiento de pagos
+- **Entornos**: Soporte para entornos sandbox y producción
+- **Seguridad de Tipos**: API completamente tipada con modelos de dominio completos
+- **Patrón Builder**: API fluida para construir parámetros de solicitud
+- **Manejo de Errores**: Manejo estructurado de excepciones con información detallada de errores
 
-## Requirements
+## Requerimientos
 
-- Java 17 or higher
-- Maven 3.6 or higher
+- Java 17 o superior
+- Maven 3.6 o superior
 
-## Installation
+## Instalación
 
-Add the following dependency to your `pom.xml`:
+Añade la siguiente dependencia a tu `pom.xml`:
 
 ```xml
 
@@ -29,14 +29,14 @@ Add the following dependency to your `pom.xml`:
 </dependency>
 ```
 
-## Configuration
+## Configuración
 
-### Environment Configuration
+### Configuración de Entorno
 
-The client supports two predefined environments:
+El cliente soporta dos entornos predefinidos:
 
-- **SANDBOX**: `https://sand-api.wipop.es` - For testing and development
-- **PRODUCTION**: `https://api.wipop.es` - For live transactions
+- **SANDBOX**: `https://sand-api.wipop.es` - Para pruebas y desarrollo
+- **PRODUCTION**: `https://api.wipop.es` - Para transacciones en vivo
 
 ```java
 // Sandbox environment
@@ -54,7 +54,7 @@ WipopClientConfiguration prodConfig = new WipopClientConfiguration(
 );
 ```
 
-### Client Configuration
+### Configuración del Cliente
 
 ```java
 import es.wipop.client.WipopClient;
@@ -70,11 +70,11 @@ WipopClientConfiguration config = new WipopClientConfiguration(
 WipopClient client = WipopClient.of(config);
 ```
 
-## Charge Operations
+## Operaciones de Cargo
 
-### Helper Methods
+### Métodos de Ayuda
 
-#### Create a Customer
+#### Crear un Cliente
 
 ```java
 private Customer createCustomer() {
@@ -97,7 +97,7 @@ private Customer createCustomer() {
 }
 ```
 
-#### Create a Terminal
+#### Crear un Terminal
 
 ```java
 private Terminal createTerminal() {
@@ -107,7 +107,7 @@ private Terminal createTerminal() {
 }
 ```
 
-### Create a charge link
+### Crear un enlace de cargo
 
 ```java
 import es.wipop.client.domain.*;
@@ -131,7 +131,7 @@ CreateChargeParams params = new CreateChargeParams()
 Charge charge = client.chargeOperation().create(params);
 ```
 
-### Create charge with token generation
+### Crear cargo con generación de token
 
 ```java
 // Create a charge that generates a token for future use
@@ -149,7 +149,7 @@ Charge charge = client.chargeOperation().create(params);
 // Returns CHARGE_PENDING status with redirect URL
 ```
 
-### Create one-click charge
+### Crear cargo de un clic
 
 ```java
 // Create a one-click charge using a previously stored token
@@ -169,7 +169,7 @@ Charge charge = client.chargeOperation().create(params);
 // Returns CHARGE_PENDING status with 3D Secure authentication if required
 ```
 
-### Create recurrent charge
+### Crear cargo recurrente
 
 ```java
 // Create a recurrent charge for subscription payments
@@ -191,7 +191,7 @@ CreateChargeParams params = new CreateChargeParams()
 Charge charge = client.chargeOperation().create(params);
 ```
 
-### Create pre-authorization
+### Crear preautorización
 
 ```java
 // Create a pre-authorization (capture = false)
@@ -210,7 +210,7 @@ Charge charge = client.chargeOperation().create(params);
 // Returns CHARGE_PENDING status - funds are reserved but not captured
 ```
 
-#### Confirm a pending charge
+#### Confirmar un cargo pendiente
 
 ```java
 import es.wipop.client.operations.charge.params.ConfirmChargeParams;
@@ -224,7 +224,7 @@ Charge confirmedCharge = client.chargeOperation()
       .confirm("tr000000000000000000", confirmParams);
 ```
 
-#### Refund a charge
+#### Reembolsar un cargo
 
 ```java
 import es.wipop.client.operations.charge.params.RefundParams;
@@ -236,7 +236,7 @@ Charge refundedCharge = client.chargeOperation()
       .refund("tr000000000000000000", refundParams);
 ```
 
-#### Reverse a charge
+#### Reversar un cargo
 
 ```java
 import es.wipop.client.operations.charge.params.ReversalParams;
@@ -248,7 +248,7 @@ Charge reversedCharge = client.chargeOperation()
       .reversal("tr000000000000000000", reversalParams);
 ```
 
-#### Capture a pre-authorized charge
+#### Capturar un cargo preautorizado
 
 ```java
 import es.wipop.client.operations.charge.params.CaptureParams;
@@ -260,9 +260,9 @@ Charge capturedCharge = client.chargeOperation()
       .capture("tr000000000000000000", captureParams);
 ```
 
-### Checkout Operations
+### Operaciones de Checkout
 
-#### Create a checkout
+#### Crear un checkout
 
 ```java
 import es.wipop.client.operations.checkout.params.CheckoutParams;
@@ -283,7 +283,7 @@ CheckoutParams checkoutParams = new CheckoutParams()
 Checkout checkout = client.checkoutOperation().createCheckout(checkoutParams);
 ```
 
-### Error Handling
+### Manejo de Errores
 
 ```java
 import es.wipop.client.exception.WipopClientException;
@@ -296,45 +296,45 @@ try{
 }
 ```
 
-## API Reference
+## Referencia de la API
 
-### Core Classes
+### Clases Principales
 
-- **WipopClient**: Main client for API operations
-- **WipopClientConfiguration**: Client configuration and environment settings
-- **ChargeOperation**: Interface for charge-related operations
-- **CheckoutOperation**: Interface for checkout-related operations
+- **WipopClient**: Cliente principal para operaciones de API
+- **WipopClientConfiguration**: Configuración del cliente y ajustes de entorno
+- **ChargeOperation**: Interfaz para operaciones relacionadas con cargos
+- **CheckoutOperation**: Interfaz para operaciones relacionadas con checkout
 
-### Domain Models
+### Modelos de Dominio
 
-- **Charge**: Represents a payment charge
-- **Checkout**: Represents a checkout session
-- **Customer**: Customer information
-- **Card**: Payment card details
-- **Address**: Address information
-- **Terminal**: Payment terminal details
+- **Charge**: Representa un cargo de pago
+- **Checkout**: Representa una sesión de checkout
+- **Customer**: Información del cliente
+- **Card**: Detalles de la tarjeta de pago
+- **Address**: Información de dirección
+- **Terminal**: Detalles del terminal de pago
 
-### Parameter Classes
+### Clases de Parámetros
 
-- **CreateChargeParams**: Parameters for creating charges
-- **ConfirmChargeParams**: Parameters for confirming charges
-- **RefundParams**: Parameters for refunding charges
-- **ReversalParams**: Parameters for reversing charges
-- **CaptureParams**: Parameters for capturing charges
-- **CheckoutParams**: Parameters for creating checkouts
+- **CreateChargeParams**: Parámetros para crear cargos
+- **ConfirmChargeParams**: Parámetros para confirmar cargos
+- **RefundParams**: Parámetros para reembolsar cargos
+- **ReversalParams**: Parámetros para reversar cargos
+- **CaptureParams**: Parámetros para capturar cargos
+- **CheckoutParams**: Parámetros para crear checkouts
 
-## Contributing
+## Contribuir
 
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Add tests for new functionality
-5. Submit a pull request
+1. Haz fork del repositorio
+2. Crea una rama de funcionalidad
+3. Realiza tus cambios
+4. Añade pruebas para la nueva funcionalidad
+5. Envía un pull request
 
-## License
+## Licencia
 
-This project is licensed under the terms specified in the project license file.
+Este proyecto está licenciado bajo los términos especificados en el archivo de licencia del proyecto.
 
-## Support
+## Soporte
 
-For support and questions, please refer to the official Wipop documentation or contact the development team.
+Para soporte y preguntas, consulta la documentación oficial de Wipop o contacta con el equipo de desarrollo.
