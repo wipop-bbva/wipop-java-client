@@ -2,6 +2,7 @@ package es.wipop.client.operations.charge.impl;
 
 import es.wipop.client.WipopClientConfiguration;
 import es.wipop.client.domain.Charge;
+import es.wipop.client.domain.ChargeMethod;
 import es.wipop.client.operations.AbstractOperation;
 import es.wipop.client.operations.charge.ChargeOperation;
 import es.wipop.client.operations.charge.params.*;
@@ -22,14 +23,16 @@ public class ChargeOperationImpl extends AbstractOperation implements ChargeOper
 
    /** {@inheritDoc} */
    @Override
-   public Charge create(CreateChargeParams createCardChargeParams) {
-      return post("/c/v1/{merchantId}/charges", createCardChargeParams.asMap(), Charge.class, configuration.merchantId());
+   public Charge create(CreateChargeParams createChargeParams) {
+      final var pathPrefix = getPathPrefix(createChargeParams);
+      return post(pathPrefix + "/v1/{merchantId}/charges", createChargeParams.asMap(), Charge.class, configuration.merchantId());
    }
 
    /** {@inheritDoc} */
    @Override
-   public Charge create(String customerId, CreateChargeParams createCardChargeParams) {
-      return post("/c/v1/{merchantId}/customers/{customerId}/charges", createCardChargeParams.asMap(), Charge.class, configuration.merchantId(), customerId);
+   public Charge create(String customerId, CreateChargeParams createChargeParams) {
+      final var pathPrefix = getPathPrefix(createChargeParams);
+      return post(pathPrefix + "/v1/{merchantId}/customers/{customerId}/charges", createChargeParams.asMap(), Charge.class, configuration.merchantId(), customerId);
    }
 
    /** {@inheritDoc} */
@@ -60,5 +63,21 @@ public class ChargeOperationImpl extends AbstractOperation implements ChargeOper
    @Override
    public Charge capture(String transactionId, CaptureParams params) {
       return post("/c/v1/{merchantId}/charges/{transactionId}/capture", params.asMap(), Charge.class, configuration.merchantId(), transactionId);
+   }
+
+   /**
+    * Determines the URL path prefix based on the payment method.
+    *
+    * @param params the charge parameters
+    * @return the path prefix (/c for CARD, /b for BIZUM)
+    */
+   private String getPathPrefix(CreateChargeParams params) {
+      final var method = params.asMap().get("method");
+      if (method instanceof ChargeMethod chargeMethod)
+         return switch (chargeMethod) {
+            case BIZUM -> "/b";
+            case CARD -> "/c";
+         };
+      throw new IllegalArgumentException("Charge method is required to perform this operation");
    }
 }

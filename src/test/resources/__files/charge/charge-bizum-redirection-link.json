@@ -1,0 +1,18 @@
+{
+  "id": "tr000000000000000000",
+  "method": "BIZUM",
+  "currency": "EUR",
+  "operation_type": "IN",
+  "transaction_type": "CHARGE",
+  "status": "CHARGE_PENDING",
+  "creation_date": "2025-08-14T07:28:00",
+  "operation_date": "2025-08-14T07:28:15",
+  "description": "Test Bizum payment",
+  "order_id": "1234abcdefgh",
+  "amount": 1,
+  "customer_id": "a0000000000000000000",
+  "payment_method": {
+    "url": "https:/test.wipop.es/b/v1/m00000000000000000/charges/tr000000000000000000/bizum_capture?lang=es-ES",
+    "type": "REDIRECT"
+  }
+}

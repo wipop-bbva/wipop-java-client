@@ -13,12 +13,12 @@ import java.util.Map;
 public class CreateChargeParams extends RequestBuilder {
 
    /**
-    * Sets the charge method.
+    * Sets the charge method (CARD or BIZUM).
     *
     * @param method the charge method
     * @return this instance for method chaining
     */
-   public CreateChargeParams card(final ChargeMethod method) {
+   public CreateChargeParams method(final ChargeMethod method) {
       return this.with("method", method);
    }
 

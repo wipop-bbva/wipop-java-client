@@ -107,7 +107,11 @@ private Terminal createTerminal() {
 }
 ```
 
-### Create a charge link
+### Payment Methods
+
+The client supports different payment methods through the `method()` parameter:
+
+#### Create a CARD charge
 
 ```java
 import es.wipop.client.domain.*;
@@ -115,19 +119,38 @@ import es.wipop.client.operations.charge.params.CreateChargeParams;
 
 import java.math.BigDecimal;
 
-// Create charge parameters
+// Create charge with CARD method
 CreateChargeParams params = new CreateChargeParams()
+      .method(ChargeMethod.CARD)  // Specify CARD payment method
       .amount(BigDecimal.ONE)
       .currency(Currency.EUR)
       .orderId("1234abcdefgh")
-      .description("Test redirection payment link")
+      .description("Test card payment")
       .productType(ProductType.PAYMENT_LINK)
       .originChannel(OriginChannel.API)
       .capture(true)
       .customer(createCustomer())
       .terminal(createTerminal());
 
-// Execute the charge
+Charge charge = client.chargeOperation().create(params);
+```
+
+#### Create a BIZUM charge
+
+```java
+// Create charge with BIZUM method
+CreateChargeParams params = new CreateChargeParams()
+      .method(ChargeMethod.BIZUM)  // Specify BIZUM payment method
+      .amount(BigDecimal.ONE)
+      .currency(Currency.EUR)
+      .orderId("1234abcdefgh")
+      .description("Test Bizum payment")
+      .productType(ProductType.PAYMENT_LINK)
+      .originChannel(OriginChannel.API)
+      .capture(true)
+      .customer(createCustomer())
+      .terminal(createTerminal());
+
 Charge charge = client.chargeOperation().create(params);
 ```
 
@@ -313,6 +336,7 @@ try{
 - **Card**: Payment card details
 - **Address**: Address information
 - **Terminal**: Payment terminal details
+- **ChargeMethod**: Payment method enumeration (CARD, BIZUM)
 
 ### Parameter Classes
 

@@ -34,6 +34,7 @@ class ChargeOperationIT {
    @Test
    void shouldCreateCharge() {
       final var params = new CreateChargeParams()
+            .method(ChargeMethod.CARD)
             .amount(BigDecimal.ONE)
             .currency(Currency.EUR)
             .orderId("1234abcdefgh")
@@ -65,8 +66,43 @@ class ChargeOperationIT {
    }
 
    @Test
+   void shouldCreateBizumCharge() {
+      final var params = new CreateChargeParams()
+            .method(ChargeMethod.BIZUM)
+            .amount(BigDecimal.ONE)
+            .currency(Currency.EUR)
+            .orderId("1234abcdefgh")
+            .description("Test Bizum payment")
+            .productType(PAYMENT_LINK)
+            .originChannel(API)
+            .capture(true)
+            .customer(CustomerFixture.getCustomer())
+            .terminal(getTerminal("1"));
+
+      final var charge = chargeOperation.create(params);
+
+      assertThat(charge)
+            .isNotNull()
+            .returns("tr000000000000000000", Charge::getId)
+            .returns("BIZUM", Charge::getMethod)
+            .returns("EUR", Charge::getCurrency)
+            .returns("IN", Charge::getOperationType)
+            .returns("CHARGE", Charge::getTransactionType)
+            .returns("CHARGE_PENDING", Charge::getStatus)
+            .returns("Test Bizum payment", Charge::getDescription)
+            .returns("1234abcdefgh", Charge::getOrderId)
+            .returns(BigDecimal.ONE, Charge::getAmount)
+            .returns("a0000000000000000000", Charge::getCustomerId);
+      assertThat(charge.getPaymentMethod())
+            .isNotNull()
+            .returns("https:/test.wipop.es/b/v1/m00000000000000000/charges/tr000000000000000000/bizum_capture?lang=es-ES", PaymentMethod::getUrl)
+            .returns(PaymentMethodType.REDIRECT, PaymentMethod::getType);
+   }
+
+   @Test
    void shouldCreateChargeWithCustomerId() {
       final var params = new CreateChargeParams()
+            .method(ChargeMethod.CARD)
             .amount(BigDecimal.ONE)
             .currency(Currency.EUR)
             .orderId("1234abcdefgh")
@@ -99,6 +135,7 @@ class ChargeOperationIT {
    @Test
    void shouldCreateOneClickCharge() {
       final var params = new CreateChargeParams()
+            .method(ChargeMethod.CARD)
             .amount(BigDecimal.ONE)
             .currency(Currency.EUR)
             .orderId("1234abcdefgh")
@@ -138,6 +175,7 @@ class ChargeOperationIT {
    @Test
    void shouldCreateCofCharge() {
       final var params = new CreateChargeParams()
+            .method(ChargeMethod.CARD)
             .amount(BigDecimal.ONE)
             .currency(Currency.EUR)
             .orderId("1234abcdefgh")
@@ -169,6 +207,8 @@ class ChargeOperationIT {
    @Test
    void shouldCreatePreAuthorizedCharge() {
       final var params = new CreateChargeParams()
+            .method(ChargeMethod.CARD)
+            .method(ChargeMethod.CARD)
             .amount(BigDecimal.ONE)
             .currency(Currency.EUR)
             .orderId("1234abcdefgh")
