@@ -3,11 +3,12 @@ package es.wipop.client;
 /**
  * Configuration for the Wipop client.
  *
- * @param location   the API base URL
- * @param merchantId the merchant identifier
- * @param secretKey  the secret key for authentication
+ * @param location          the API base URL
+ * @param merchantId        the merchant identifier
+ * @param secretKey         the secret key for authentication
+ * @param httpConfiguration HTTP timeout configuration
  */
-public record WipopClientConfiguration(String location, String merchantId, String secretKey) {
+public record WipopClientConfiguration(String location, String merchantId, String secretKey, WipopClientHttpConfiguration httpConfiguration) {
 
    /**
     * Creates a configuration using a predefined environment.
@@ -17,7 +18,18 @@ public record WipopClientConfiguration(String location, String merchantId, Strin
     * @param secretKey   the secret key for authentication
     */
    public WipopClientConfiguration(Environment environment, String merchantId, String secretKey) {
-      this(environment.getLocation(), merchantId, secretKey);
+      this(environment.getLocation(), merchantId, secretKey, new WipopClientHttpConfiguration());
+   }
+
+   /**
+    * Creates a configuration using a predefined environment with custom HTTP settings.
+    *
+    * @param environment the environment (SANDBOX or PRODUCTION)
+    * @param merchantId  the merchant identifier
+    * @param secretKey   the secret key for authentication
+    */
+   public WipopClientConfiguration(String environment, String merchantId, String secretKey) {
+      this(environment, merchantId, secretKey, new WipopClientHttpConfiguration());
    }
 
    /**

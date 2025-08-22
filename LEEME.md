@@ -59,15 +59,40 @@ WipopClientConfiguration prodConfig = new WipopClientConfiguration(
 ```java
 import es.wipop.client.WipopClient;
 import es.wipop.client.WipopClientConfiguration;
+import es.wipop.client.WipopClientHttpConfiguration;
 
-// Using sandbox environment
+// Usando entorno sandbox con configuración HTTP por defecto
 WipopClientConfiguration config = new WipopClientConfiguration(
       WipopClientConfiguration.Environment.SANDBOX,
       "your-merchant-id",
       "your-secret-key"
 );
 
+// Usando configuración HTTP personalizada para timeouts
+WipopClientHttpConfiguration httpConfig = new WipopClientHttpConfiguration(10000, 45000);
+WipopClientConfiguration configWithTimeouts = new WipopClientConfiguration(
+      WipopClientConfiguration.Environment.SANDBOX,
+      "your-merchant-id",
+      "your-secret-key",
+      httpConfig
+);
+
 WipopClient client = WipopClient.of(config);
+```
+
+### Configuración HTTP
+
+El cliente soporta configuración de timeouts HTTP a través de `WipopClientHttpConfiguration`:
+
+- **connectionRequestTimeout**: Timeout para solicitud de conexión (por defecto: 5 segundos)
+- **responseTimeout**: Timeout para esperar respuestas (por defecto: 30 segundos)
+
+```java
+// Timeouts por defecto (5s, 30s)
+WipopClientHttpConfiguration defaultConfig = new WipopClientHttpConfiguration();
+
+// Timeouts personalizados (solicitud conexión, respuesta en milisegundos)
+WipopClientHttpConfiguration customConfig = new WipopClientHttpConfiguration(10000, 45000);
 ```
 
 ## Operaciones de Cargo

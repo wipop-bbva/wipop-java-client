@@ -6,11 +6,14 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import es.wipop.client.WipopClientConfiguration;
+import es.wipop.client.WipopClientHttpConfiguration;
 import es.wipop.client.domain.response.WipopResponse;
 import es.wipop.client.exception.WipopClientException;
 import org.apache.hc.client5.http.classic.methods.*;
+import org.apache.hc.client5.http.config.RequestConfig;
 import org.apache.hc.client5.http.impl.classic.CloseableHttpClient;
 import org.apache.hc.client5.http.impl.classic.HttpClients;
+import org.apache.hc.core5.util.Timeout;
 import org.apache.hc.core5.http.ContentType;
 import org.apache.hc.core5.http.io.HttpClientResponseHandler;
 import org.apache.hc.core5.http.io.entity.EntityUtils;
@@ -46,11 +49,22 @@ public abstract class AbstractOperation {
    protected AbstractOperation(WipopClientConfiguration configuration) {
       this.configuration = configuration;
       this.token = this.getToken();
-      this.httpClient = HttpClients.createDefault();
+      this.httpClient = createHttpClient(configuration.httpConfiguration());
       this.objectMapper = new ObjectMapper()
             .registerModule(new JavaTimeModule())
             .configure(DeserializationFeature.FAIL_ON_IGNORED_PROPERTIES, false)
             .setPropertyNamingStrategy(PropertyNamingStrategies.LOWER_CAMEL_CASE);
+   }
+
+   private CloseableHttpClient createHttpClient(WipopClientHttpConfiguration httpConfig) {
+      final var requestConfig = RequestConfig.custom()
+            .setConnectionRequestTimeout(Timeout.ofMilliseconds(httpConfig.connectionRequestTimeout()))
+            .setResponseTimeout(Timeout.ofMilliseconds(httpConfig.responseTimeout()))
+            .build();
+
+      return HttpClients.custom()
+            .setDefaultRequestConfig(requestConfig)
+            .build();
    }
 
    private <T> T invoke(
