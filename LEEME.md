@@ -4,12 +4,21 @@ Una librería cliente de Java para integrar con la API de procesamiento de pagos
 
 ## Características
 
-- **Operaciones de Cargo**: Crear, confirmar, capturar, reembolsar y reversar cargos
-- **Operaciones de Checkout**: Crear checkout para procesamiento de pagos
-- **Entornos**: Soporte para entornos sandbox y producción
-- **Seguridad de Tipos**: API completamente tipada con modelos de dominio completos
-- **Patrón Builder**: API fluida para construir parámetros de solicitud
-- **Manejo de Errores**: Manejo estructurado de excepciones con información detallada de errores
+- **Operaciones de Cargo con Tarjeta**
+    - Generación de link de pago
+    - Devoluciones
+    - Creación de preautorización
+    - Confirmación de preautorización
+    - Anulación de preautorización
+    - Generación de tokens
+    - Cargos de un clic
+    - Cargos recurrentes
+- **Operaciones de Cargo Bizum**
+    - Creación de enlaces de pago
+    - Devoluciones
+- **Operaciones de Checkout**
+    - Generación de enlaces de pago
+    - Botón de pago
 
 ## Requerimientos
 
