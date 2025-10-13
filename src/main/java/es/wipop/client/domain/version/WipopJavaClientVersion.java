@@ -6,9 +6,9 @@ package es.wipop.client.domain.version;
 public final class WipopJavaClientVersion {
 
    /** Major version number */
-   private static final int MAJOR = 1;
+   private static final int MAJOR = 0;
    /** Minor version number */
-   private static final int MINOR = 0;
+   private static final int MINOR = 1;
    /** Patch version number */
    private static final int PATCH = 0;
 

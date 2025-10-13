@@ -22,10 +22,6 @@ public class Card implements Serializable {
    @JsonProperty("bank_name")
    private String bankName;
 
-   /** Whether the card allows payout operations */
-   @JsonProperty("allows_payouts")
-   private Boolean allowsPayouts;
-
    /** Name of the cardholder */
    @JsonProperty("holder_name")
    private String holderName;
@@ -48,17 +44,9 @@ public class Card implements Serializable {
    /** Card brand (e.g., VISA, MASTERCARD) */
    private String brand;
 
-   /** Whether the card allows charge operations */
-   @JsonProperty("allows_charges")
-   private Boolean allowsCharges;
-
    /** Bank identification code */
    @JsonProperty("bank_code")
    private String bankCode;
-
-   /** Token identifier for the card */
-   @JsonProperty("token_id")
-   private String tokenId;
 
    /** Type of the card */
    private String type;
@@ -104,24 +92,6 @@ public class Card implements Serializable {
     */
    public void setBankName(String bankName) {
       this.bankName = bankName;
-   }
-
-   /**
-    * Gets whether the card allows payouts.
-    *
-    * @return true if payouts are allowed, false otherwise
-    */
-   public Boolean getAllowsPayouts() {
-      return allowsPayouts;
-   }
-
-   /**
-    * Sets whether the card allows payouts.
-    *
-    * @param allowsPayouts true if payouts are allowed, false otherwise
-    */
-   public void setAllowsPayouts(Boolean allowsPayouts) {
-      this.allowsPayouts = allowsPayouts;
    }
 
    /**
@@ -233,24 +203,6 @@ public class Card implements Serializable {
    }
 
    /**
-    * Gets whether the card allows charges.
-    *
-    * @return true if charges are allowed, false otherwise
-    */
-   public Boolean getAllowsCharges() {
-      return allowsCharges;
-   }
-
-   /**
-    * Sets whether the card allows charges.
-    *
-    * @param allowsCharges true if charges are allowed, false otherwise
-    */
-   public void setAllowsCharges(Boolean allowsCharges) {
-      this.allowsCharges = allowsCharges;
-   }
-
-   /**
     * Gets the bank code.
     *
     * @return the bank code
@@ -266,24 +218,6 @@ public class Card implements Serializable {
     */
    public void setBankCode(String bankCode) {
       this.bankCode = bankCode;
-   }
-
-   /**
-    * Gets the token ID.
-    *
-    * @return the token ID
-    */
-   public String getTokenId() {
-      return tokenId;
-   }
-
-   /**
-    * Sets the token ID.
-    *
-    * @param tokenId the token ID to set
-    */
-   public void setTokenId(String tokenId) {
-      this.tokenId = tokenId;
    }
 
    /**

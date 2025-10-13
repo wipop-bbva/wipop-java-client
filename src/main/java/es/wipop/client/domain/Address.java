@@ -15,8 +15,8 @@ public class Address implements Serializable {
    private static final long serialVersionUID = WipopJavaClientVersion.SERIAL_VERSION;
 
    /** Postal code (required) */
-   @JsonProperty("postal_code")
-   private String postalCode;
+   @JsonProperty("zip_code")
+   private String zipCode;
 
    /** First line of address (required) */
    private String line1;
@@ -38,21 +38,21 @@ public class Address implements Serializable {
    private String countryCode;
 
    /**
-    * Gets the postal code.
+    * Gets the zip code.
     *
-    * @return the postal code
+    * @return the zip code
     */
-   public String getPostalCode() {
-      return postalCode;
+   public String getZipCode() {
+      return zipCode;
    }
 
    /**
-    * Sets the postal code.
+    * Sets the zip code.
     *
-    * @param postalCode the postal code to set
+    * @param zipCode the zip code to set
     */
-   public void setPostalCode(String postalCode) {
-      this.postalCode = postalCode;
+   public void setZipCode(String zipCode) {
+      this.zipCode = zipCode;
    }
 
    /**

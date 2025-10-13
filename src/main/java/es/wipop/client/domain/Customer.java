@@ -5,7 +5,7 @@ import es.wipop.client.domain.version.WipopJavaClientVersion;
 
 import java.io.Serial;
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDate;
 
 /**
  * Represents a customer in the payment system.
@@ -41,7 +41,7 @@ public class Customer implements Serializable {
 
    /** Date when the customer was created */
    @JsonProperty("creation_date")
-   private Date creationDate;
+   private LocalDate creationDate;
 
    /**
     * Gets the customer ID.
@@ -174,7 +174,7 @@ public class Customer implements Serializable {
     *
     * @return the creation date
     */
-   public Date getCreationDate() {
+   public LocalDate getCreationDate() {
       return creationDate;
    }
 
@@ -183,7 +183,7 @@ public class Customer implements Serializable {
     *
     * @param creationDate the creation date to set
     */
-   public void setCreationDate(Date creationDate) {
+   public void setCreationDate(LocalDate creationDate) {
       this.creationDate = creationDate;
    }
 }
