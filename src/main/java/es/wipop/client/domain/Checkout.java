@@ -32,9 +32,6 @@ public class Checkout implements Serializable {
    /** Currency code */
    private String currency;
 
-   /** VAT/IVA information */
-   private String iva;
-
    /** Current status of the checkout */
    private String status;
 
@@ -50,15 +47,8 @@ public class Checkout implements Serializable {
    @JsonProperty("creation_date")
    private LocalDateTime creationDate;
 
-   /** Plan identifier if applicable */
-   @JsonProperty("plan_id")
-   private Integer planId;
-
    /** Customer associated with the checkout */
    private Customer customer;
-
-   /** Transaction details if completed */
-   private Transaction transaction;
 
    /** Origin channel of the checkout */
    @JsonProperty("origin")
@@ -155,24 +145,6 @@ public class Checkout implements Serializable {
    }
 
    /**
-    * Gets the VAT/IVA information.
-    *
-    * @return the VAT/IVA
-    */
-   public String getIva() {
-      return iva;
-   }
-
-   /**
-    * Sets the VAT/IVA information.
-    *
-    * @param iva the VAT/IVA to set
-    */
-   public void setIva(String iva) {
-      this.iva = iva;
-   }
-
-   /**
     * Gets the checkout status.
     *
     * @return the status
@@ -245,24 +217,6 @@ public class Checkout implements Serializable {
    }
 
    /**
-    * Gets the plan ID.
-    *
-    * @return the plan ID
-    */
-   public Integer getPlanId() {
-      return planId;
-   }
-
-   /**
-    * Sets the plan ID.
-    *
-    * @param planId the plan ID to set
-    */
-   public void setPlanId(Integer planId) {
-      this.planId = planId;
-   }
-
-   /**
     * Gets the customer information.
     *
     * @return the customer
@@ -278,24 +232,6 @@ public class Checkout implements Serializable {
     */
    public void setCustomer(Customer customer) {
       this.customer = customer;
-   }
-
-   /**
-    * Gets the transaction details.
-    *
-    * @return the transaction
-    */
-   public Transaction getTransaction() {
-      return transaction;
-   }
-
-   /**
-    * Sets the transaction details.
-    *
-    * @param transaction the transaction to set
-    */
-   public void setTransaction(Transaction transaction) {
-      this.transaction = transaction;
    }
 
    /**
