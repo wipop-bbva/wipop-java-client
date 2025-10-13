@@ -4,12 +4,21 @@ A Java client library for integrating with the Wipop payment processing API.
 
 ## Features
 
-- **Charge Operations**: Create, confirm, capture, refund, and reverse charges
-- **Checkout Operations**: Create checkout for payment processing
-- **Environments**: Support for sandbox and production environments
-- **Type Safety**: Fully typed API with comprehensive domain models
-- **Builder Pattern**: Fluent API for building request parameters
-- **Error Handling**: Structured exception handling with detailed error information
+- **Card Charge Operations**
+    - Payment link generation
+    - Refunds
+    - Pre-authorization creation
+    - Pre-authorization confirmation
+    - Pre-authorization reversal
+    - Token generation
+    - One-click charges
+    - Recurring charges
+- **Bizum Charge Operations**
+    - Payment link creation
+    - Refunds
+- **Checkout Operations**
+    - Payment link generation
+    - Payment button
 
 ## Requirements
 
