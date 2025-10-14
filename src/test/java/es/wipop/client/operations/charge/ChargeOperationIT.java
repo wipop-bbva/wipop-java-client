@@ -1,6 +1,6 @@
 package es.wipop.client.operations.charge;
 
-import com.github.tomakehurst.wiremock.junit5.WireMockTest;
+import com.github.tomakehurst.wiremock.junit5.WireMockExtension;
 import es.wipop.client.WipopClient;
 import es.wipop.client.WipopClientConfiguration;
 import es.wipop.client.domain.*;
@@ -8,10 +8,13 @@ import es.wipop.client.fixture.CustomerFixture;
 import es.wipop.client.operations.charge.params.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.RegisterExtension;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
+import static com.github.tomakehurst.wiremock.core.WireMockConfiguration.wireMockConfig;
 import static es.wipop.client.domain.OriginChannel.API;
 import static es.wipop.client.domain.PaymentMethodType.REDIRECT;
 import static es.wipop.client.domain.PaymentMethodType.THREE_DS;
@@ -20,14 +23,19 @@ import static es.wipop.client.domain.ProductType.PAYMENT_LINK;
 import static es.wipop.client.fixture.TerminalFixture.getTerminal;
 import static org.assertj.core.api.Assertions.assertThat;
 
-@WireMockTest(httpPort = 8080)
 class ChargeOperationIT {
+
+   @RegisterExtension
+   static WireMockExtension wme = WireMockExtension.newInstance()
+         .options(wireMockConfig().dynamicPort().dynamicHttpsPort())
+         .build();
 
    private ChargeOperation chargeOperation;
 
    @BeforeEach
    void setUp() {
-      final var config = new WipopClientConfiguration("http://localhost:8080", "m00000000000000000", "sk_test_key");
+      final var location = "http://localhost:%d".formatted(wme.getPort());
+      final var config = new WipopClientConfiguration(location, "m00000000000000000", "sk_test_key");
       this.chargeOperation = WipopClient.of(config).chargeOperation();
    }
 
@@ -269,6 +277,7 @@ class ChargeOperationIT {
             .returns("2.2.0", Emv3ds::getProtocolVersion)
             .returns("f169409a-9656-40a5-a22f-399c2048b121", Emv3ds::getThreeDSServerTransID)
             .returns("https://3ds.example/method", Emv3ds::getThreeDSMethodURL);
+      assertCard(charge.getCard());
    }
 
    @Test
@@ -301,6 +310,7 @@ class ChargeOperationIT {
             .returns("2.2.0", Emv3ds::getProtocolVersion)
             .returns("f169409a-9656-40a5-a22f-399c2048b121", Emv3ds::getThreeDSServerTransID)
             .returns("https://3ds.example/method", Emv3ds::getThreeDSMethodURL);
+      assertCard(charge.getCard());
    }
 
    @Test
@@ -397,5 +407,19 @@ class ChargeOperationIT {
             .returns("foo.bar@example.com", Customer::getEmail)
             .returns("5555555555", Customer::getPhoneNumber)
             .returns("foo-bar", Customer::getExternalId);
+   }
+
+   void assertCard(Card card) {
+      assertThat(card)
+            .returns("k000000000000000000", Card::getId)
+            .returns("UNKNOWN", Card::getType)
+            .returns("VISA", Card::getBrand)
+            .returns("450000XXXXXX0000", Card::getCardNumber)
+            .returns("Foo Bar", Card::getHolderName)
+            .returns("49", Card::getExpirationYear)
+            .returns("12", Card::getExpirationMonth)
+            .returns("DESCONOCIDO", Card::getBankName)
+            .returns("000", Card::getBankCode)
+            .returns(LocalDateTime.of(2025, 8, 14, 12, 14, 30), Card::getCreationDate);
    }
 }

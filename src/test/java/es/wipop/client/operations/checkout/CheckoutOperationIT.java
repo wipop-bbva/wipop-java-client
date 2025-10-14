@@ -1,6 +1,6 @@
 package es.wipop.client.operations.checkout;
 
-import com.github.tomakehurst.wiremock.junit5.WireMockTest;
+import com.github.tomakehurst.wiremock.junit5.WireMockExtension;
 import es.wipop.client.WipopClient;
 import es.wipop.client.WipopClientConfiguration;
 import es.wipop.client.domain.Checkout;
@@ -10,22 +10,29 @@ import es.wipop.client.fixture.CustomerFixture;
 import es.wipop.client.operations.checkout.params.CheckoutParams;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.RegisterExtension;
 
 import java.math.BigDecimal;
 
+import static com.github.tomakehurst.wiremock.core.WireMockConfiguration.wireMockConfig;
 import static es.wipop.client.domain.OriginChannel.PAYMENT_BUTTON;
 import static es.wipop.client.domain.ProductType.PAYMENT_GATEWAY;
 import static es.wipop.client.fixture.TerminalFixture.getTerminal;
 import static org.assertj.core.api.Assertions.assertThat;
 
-@WireMockTest(httpPort = 8080)
 class CheckoutOperationIT {
+
+   @RegisterExtension
+   static WireMockExtension wme = WireMockExtension.newInstance()
+         .options(wireMockConfig().dynamicPort().dynamicHttpsPort())
+         .build();
 
    private CheckoutOperation checkoutOperation;
 
    @BeforeEach
    void setUp() {
-      final var config = new WipopClientConfiguration("http://localhost:8080", "m0000000000000000000", "sk_test_key");
+      final var location = "http://localhost:%d".formatted(wme.getPort());
+      final var config = new WipopClientConfiguration(location, "m0000000000000000000", "sk_test_key");
       this.checkoutOperation = WipopClient.of(config).checkoutOperation();
    }
 
