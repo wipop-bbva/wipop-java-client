@@ -19,7 +19,7 @@
     "address": {
       "city": "Madrid",
       "country_code": "ES",
-      "postal_code": "150993",
+      "zip_code": "150993",
       "line1": "Puerta del Sol",
       "line2": "",
       "line3": "",
@@ -35,8 +35,6 @@
     "holder_name": "Foo Bar",
     "expiration_year": "49",
     "expiration_month": "12",
-    "allows_charges": false,
-    "allows_payouts": false,
     "creation_date": "2025-08-14T12:14:30",
     "bank_name": "DESCONOCIDO",
     "bank_code": "000"

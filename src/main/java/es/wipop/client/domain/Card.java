@@ -5,7 +5,7 @@ import es.wipop.client.domain.version.WipopJavaClientVersion;
 
 import java.io.Serial;
 import java.io.Serializable;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 /**
  * Represents a payment card with its details and capabilities.
@@ -51,12 +51,9 @@ public class Card implements Serializable {
    /** Type of the card */
    private String type;
 
-   /** CVV2 security code */
-   private String cvv2;
-
    /** Date when the card was created */
    @JsonProperty("creation_date")
-   private LocalDate creationDate;
+   private LocalDateTime creationDate;
 
    /**
     * Gets the card ID.
@@ -239,29 +236,11 @@ public class Card implements Serializable {
    }
 
    /**
-    * Gets the CVV2 security code.
-    *
-    * @return the CVV2 code
-    */
-   public String getCvv2() {
-      return cvv2;
-   }
-
-   /**
-    * Sets the CVV2 security code.
-    *
-    * @param cvv2 the CVV2 code to set
-    */
-   public void setCvv2(String cvv2) {
-      this.cvv2 = cvv2;
-   }
-
-   /**
     * Gets the card creation date.
     *
     * @return the creation date
     */
-   public LocalDate getCreationDate() {
+   public LocalDateTime getCreationDate() {
       return creationDate;
    }
 
@@ -270,7 +249,7 @@ public class Card implements Serializable {
     *
     * @param creationDate the creation date to set
     */
-   public void setCreationDate(LocalDate creationDate) {
+   public void setCreationDate(LocalDateTime creationDate) {
       this.creationDate = creationDate;
    }
 }
