@@ -34,7 +34,7 @@ Añade la siguiente dependencia a tu `pom.xml`:
 <dependency>
     <groupId>es.openpay</groupId>
     <artifactId>wipop-java-client</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1.0.0</version>
 </dependency>
 ```
 
