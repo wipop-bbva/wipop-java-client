@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>es.wipop</groupId>
     <artifactId>wipop-java-client</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>1.0.0-RELEASE</version>
     <name>Wipop java client</name>
     <description>A Java client library for integrating with the Wipop payment processing API</description>
     <url>https://wipop.es</url>
