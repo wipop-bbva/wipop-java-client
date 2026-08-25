@@ -3,6 +3,7 @@ deploy_to_sonatype = 'true'
 is_github_repo = 'true'
 maven_install = 'openpay-maven-3.9.6'
 snyk_country = 'mexico'
+snyk_active = 'true'
 
 jte {
 	pipeline_template = "jar_library"
